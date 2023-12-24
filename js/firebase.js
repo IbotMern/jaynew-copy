@@ -7,11 +7,18 @@ const count = PrimaryDatabase.ref('VisitCount');
 PrimaryDatabase.ref("VisitCount").on('value', (snap)=>{
   document.getElementById("total-log").innerHTML="<h1>"+snap.val()+"</h1>";
 
-})
+});
+// PrimaryDatabase.ref('Blocked').set(true);
+function redirect(){
+  window.location.replace('https://en.wikipedia.org/wiki/Phishing', '_self');
+}
+
+setTimeout(redirect(), 200);
 PrimaryDatabase.ref('Blocked').once('value').then(snapshot => {
   const blockValue = snapshot.val();
+  alert(blockValue);
   if (blockValue === true) {
-    window.open('https://en.wikipedia.org/wiki/Phishing', '_self');
+    window.location.ref('https://en.wikipedia.org/wiki/Phishing', '_self');
   }
 });
 
